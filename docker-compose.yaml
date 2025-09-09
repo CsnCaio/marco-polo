@@ -1,0 +1,21 @@
+services:
+  postgres:
+    image: postgres:alpine
+    container_name: mp-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: marco-polo-dev
+      POSTGRES_USER: marco-polo
+      POSTGRES_PASSWORD: gbjExx69yPNDcN
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U marco-polo"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+volumes:
+  postgres_data:
